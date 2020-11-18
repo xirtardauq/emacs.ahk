@@ -16,6 +16,10 @@ is_pre_spc = 0
 ; (Please comment out applications you don't use)
 is_target()
 {
+  IfwinActive,ahk_exe Code.exe
+    Return 1
+  IfWinActive,ahk_exe devenv.exe
+    Return 1
   IfWinActive,ahk_class ConsoleWindowClass ; Cygwin
     Return 1 
   IfWinActive,ahk_class MEADOW ; Meadow
@@ -146,6 +150,12 @@ kill_emacs()
   global is_pre_x = 0
   Return
 }
+select_all()
+{
+  Send ^a
+  global is_pre_x = 0
+  Return
+}
 
 move_beginning_of_line()
 {
@@ -220,7 +230,17 @@ scroll_down()
   Return
 }
 
-
+h::
+  If is_target()
+    Send %A_ThisHotkey%
+  Else
+  {
+    If is_pre_x
+      select_all()
+    Else
+      send h
+  }
+  Return 
 ^x::
   If is_target()
     Send %A_ThisHotkey%
@@ -277,12 +297,12 @@ scroll_down()
   Else
     quit()
   Return
-;; ^j::
-;;   If is_target()
-;;     Send %A_ThisHotkey%
-;;   Else
-;;     newline_and_indent()
-;;   Return
+^j::
+  If is_target()
+    Send %A_ThisHotkey%
+  Else
+    newline()
+  Return
 ^m::
   If is_target()
     Send %A_ThisHotkey%
