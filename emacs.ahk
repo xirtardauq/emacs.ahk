@@ -16,6 +16,8 @@ is_pre_spc = 0
 ; (Please comment out applications you don't use)
 is_target()
 {
+  IfwinActive,ahk_exe WindowsTerminal.exe
+    Return 1
   IfwinActive,ahk_exe Code.exe
     Return 1
   IfWinActive,ahk_exe devenv.exe
