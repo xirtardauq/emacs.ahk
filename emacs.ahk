@@ -206,9 +206,27 @@ backward_char()
 {
   global
   if is_pre_spc
-    Send +{Left} 
+    Send +{Left}
   Else
     Send {Left}
+  Return
+}
+forward_word()
+{
+  global
+  if is_pre_spc
+    Send +^{Right}
+  Else
+    Send ^{Right}
+  Return
+}
+backward_word()
+{
+  global
+  if is_pre_spc
+    Send +^{Left} 
+  Else
+    Send ^{Left}
   Return
 }
 scroll_up()
@@ -258,6 +276,12 @@ h::
       forward_char()
   }
   Return  
+!f::
+  If is_target()
+    Send %A_ThisHotkey%
+  Else
+    forward_word()
+  Return
 ^c::
   If is_target()
     Send %A_ThisHotkey%
@@ -410,6 +434,12 @@ h::
     Send %A_ThisHotkey%
   Else
     backward_char()
+  Return
+!b::
+  If is_target()
+    Send %A_ThisHotkey%
+  Else
+    backward_word()
   Return
 ^v::
   If is_target()
