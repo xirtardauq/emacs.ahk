@@ -455,4 +455,9 @@ h::
   Else
     scroll_up()
   Return
-
+F1::
+  If is_target()
+    Send %A_ThisHotkey%
+  Else
+    quit()
+  Return
