@@ -261,6 +261,12 @@ h::
       send h
   }
   Return 
+!q::
+  If is_target()
+    Send %A_ThisHotkey%
+  Else
+    select_all()
+  Return 
 ^x::
   If is_target()
     Send %A_ThisHotkey%
