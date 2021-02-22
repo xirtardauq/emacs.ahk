@@ -382,6 +382,12 @@ h::
   Else
     yank()
   Return
+!e::
+  If is_target()
+    Send %A_ThisHotkey%
+  Else
+    yank()
+  Return
 ^/::
   If is_target()
     Send %A_ThisHotkey%
